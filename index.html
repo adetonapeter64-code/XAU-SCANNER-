@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BOT.XAU — Sniper Signal Scanner</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-mark">⌖</div>
+      <div class="brand-copy"><strong>BOT.XAU</strong><span>SNIPER SCANNER</span></div>
+      <nav>
+        <a class="nav-item active" href="#dashboard">▦ <span>Dashboard</span></a>
+        <a class="nav-item" href="#scanner">◎ <span>Screenshot scanner</span></a>
+        <a class="nav-item" href="#history">◷ <span>Signal history</span></a>
+      </nav>
+      <div class="sidebar-note"><span class="status-dot"></span> Local dashboard</div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div><p class="eyebrow">MARKET WORKSPACE</p><h1>Sniper Signal Scanner</h1></div>
+        <div class="market-chip"><span class="gold-dot"></span><div><strong>XAU/USD</strong><small>Gold · Spot</small></div></div>
+      </header>
+
+      <section class="stats-grid">
+        <article class="stat-card"><span>Live price</span><strong id="livePrice">Not connected</strong><small id="priceMeta">Configure a market data key</small></article>
+        <article class="stat-card"><span>Latest decision</span><strong id="latestDecision">WAITING</strong><small id="latestTime">No scans yet</small></article>
+        <article class="stat-card"><span>Saved scans</span><strong id="scanCount">0</strong><small>Stored in this browser</small></article>
+      </section>
+
+      <section class="content-grid" id="scanner">
+        <article class="panel upload-panel">
+          <div class="panel-heading"><div><p class="eyebrow">01 / INPUT</p><h2>Scan a chart screenshot</h2></div><span class="pill">PNG · JPG · WEBP</span></div>
+          <p class="muted">Upload a recent XAU/USD chart. The AI will inspect visible structure and return a cautious BUY, SELL, or NO TRADE assessment.</p>
+          <label class="drop-zone" for="chartFile" id="dropZone">
+            <span class="upload-icon">↑</span><strong>Choose chart image</strong><span>Tap to select from your phone · Max 8 MB</span>
+            <input id="chartFile" type="file" accept="image/png,image/jpeg,image/webp">
+          </label>
+          <div id="previewWrap" class="preview-wrap hidden"><img id="preview" alt="Selected chart preview"><button id="removeImage" class="text-button" type="button">Remove image</button></div>
+          <div class="form-row"><label for="timeframe">Timeframe shown (if known)</label><select id="timeframe"><option>Unknown</option><option>1 minute</option><option>5 minutes</option><option>15 minutes</option><option>30 minutes</option><option>1 hour</option><option>4 hours</option><option>Daily</option></select></div>
+          <button id="scanButton" class="primary-button" type="button">⌕ &nbsp; ANALYZE SCREENSHOT</button>
+          <p class="small-note" id="scanStatus" aria-live="polite">AI analysis requires your server API key.</p>
+        </article>
+
+        <article class="panel signal-panel">
+          <div class="panel-heading"><div><p class="eyebrow">02 / RESULT</p><h2>Signal panel</h2></div><span id="decisionPill" class="decision-pill neutral">WAITING</span></div>
+          <div class="signal-empty" id="emptyState"><div class="target-icon">◎</div><strong>Your analysis appears here</strong><p>Upload a chart and run a scan to view the setup, risk levels, and reasons.</p></div>
+          <div id="signalResult" class="hidden">
+            <div class="signal-banner"><span id="signalEmoji">🔎</span><div><strong id="signalTitle">NO TRADE</strong><small id="signalTime"></small></div></div>
+            <div class="levels-grid">
+              <div><span>Entry</span><strong id="entryValue">—</strong></div>
+              <div><span>Stop loss</span><strong id="slValue">—</strong></div>
+              <div><span>Take profit</span><strong id="tpValue">—</strong></div>
+              <div><span>Timeframe</span><strong id="tfValue">—</strong></div>
+            </div>
+            <div class="analysis-block"><h3>🔍 Setup observations</h3><ul id="setupList"></ul></div>
+            <div class="analysis-block"><h3>🧠 Reasons / confirmation</h3><ul id="reasonList"></ul></div>
+            <div class="analysis-block"><h3>⚠️ What needs verification</h3><ul id="missingList"></ul></div>
+            <p class="risk-note" id="warningText"></p>
+            <button id="saveSignal" class="secondary-button" type="button">Save to history</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel history-panel" id="history">
+        <div class="panel-heading"><div><p class="eyebrow">03 / RECORDS</p><h2>Recent scans</h2></div><button id="clearHistory" class="text-button" type="button">Clear history</button></div>
+        <div id="historyList" class="history-list"><p class="muted">Your saved scans will appear here.</p></div>
+      </section>
+      <footer>BOT.XAU · Analysis support only. Verify live prices and risk levels before any trade.</footer>
+    </main>
+  </div>
+  <script src="/app.js"></script>
+</body>
+</html>
